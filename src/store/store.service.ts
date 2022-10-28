@@ -3,6 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Cockpit, CockpitDocument } from './schemas/cockpit.schema';
 import { Hold, HoldDocument } from './schemas/hold.schema';
+import { Engine, EngineDocument} from "./schemas/engine.schema";
 
 @Injectable()
 export class StoreService {
@@ -11,6 +12,8 @@ export class StoreService {
     private readonly holdModel: Model<HoldDocument>,
     @InjectModel(Cockpit.name)
     private readonly cockpitModel: Model<CockpitDocument>,
+    @InjectModel(Engine.name)
+    private readonly engineModel: Model<EngineDocument>,
   ) {}
 
   findHolds(): Promise<Hold[]> {
@@ -19,5 +22,9 @@ export class StoreService {
 
   findCockpits(): Promise<Cockpit[]> {
     return this.cockpitModel.find().exec();
+  }
+
+  findEngine(): Promise<Engine[]> {
+    return this.engineModel.find().exec();
   }
 }

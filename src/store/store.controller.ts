@@ -9,9 +9,11 @@ export class StoreController {
   async getStore() {
     const holds = await this.storeService.findHolds();
     const cockpits = await this.storeService.findCockpits();
+    const engines = await this.storeService.findEngine();
     return {
       holds,
       cockpits,
+      engines,
     };
   }
 }
